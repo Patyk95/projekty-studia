@@ -8,6 +8,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import mean_absolute_error
 from sklearn.tree import DecisionTreeClassifier
 import random
+import xlsxwriter
 
 kwadrat= np.array([[1,0,0,1],[3,3,0,0],[2,0,0,2],[9,0,9,0],[4,0,4,0],[7,7,0,0],[4.5,0,4.5,0],[3,3,0,0],[0,15,0,15],[0,0,8,8],[0,5,0,5],[1.5,0,1.5,0]])
 etykieta_kwadrat =np.array([0,0,0,0,0,0,0,0,0,0,0,0])
@@ -83,8 +84,51 @@ Ypred3=clas2.predict(Xtest)
 
 # Zwiększamy liczbę testów
 
-var = np.random.randint(0,100)
-print(var)
-n =np.random.randint(0,3)
-print(n)
 
+biggerdataset=pd.read_excel(r"C:\Users\48667\Desktop\dane.xlsx")
+
+x=biggerdataset.iloc[:,:4].values.round(decimals=2)
+y=biggerdataset.iloc[:,4].values
+
+Xtrain, Xtest,Ytrain,Ytest =train_test_split(x,y.ravel(),train_size=0.85)
+clasiication= LogisticRegression()
+clasiication.fit(Xtrain,Ytrain)
+Ypred=clasiication.predict(Xtest)
+#print(Ytest )
+#print(Ypred )
+#print(f'Dla algorytmu Regresji dopasowanie wynosi {accuracy_score(Ytest,Ypred)}')
+
+
+clasiication1= LinearRegression()
+clasiication1.fit(Xtrain,Ytrain)
+Ypred1=clasiication1.predict(Xtest)
+#print(mean_absolute_error(Ytest,Ypred1))
+
+
+clas1= KNeighborsClassifier(n_neighbors=5)
+clas1.fit(Xtrain,Ytrain)
+Ypred2=clas1.predict(Xtest)
+print(f'Dla algarytmu KNN dopaswoanie wynosi {accuracy_score(Ytest,Ypred2)}')
+#print(Ypred2)
+
+clas2= DecisionTreeClassifier()
+clas2.fit(Xtrain,Ytrain)
+Ypred3=clas2.predict(Xtest)
+print(f'Dla algorytmu drzewa decyzyjnego dopasowanie wynosi {accuracy_score(Ytest,Ypred3)}')
+#print(Ypred3)
+
+
+x=np.array([[20,0,5,0]])
+#print(x[0,1])
+x.reshape(1,-1)
+#print(x)
+prediction=clas2.predict(x)
+#print(prediction)
+if prediction==0:
+    print('kwadrat')
+elif prediction==1:
+    print('prostokąt')
+elif prediction==2:
+    print('trapez')
+elif prediction==3:
+    print('trójkąt')
