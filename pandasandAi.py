@@ -1,5 +1,13 @@
 import pandas as pd
 import numpy as np
+from sklearn.metrics import accuracy_score
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import mean_absolute_error
+from sklearn.tree import DecisionTreeClassifier
+import random
 
 kwadrat= np.array([[1,0,0,1],[3,3,0,0],[2,0,0,2],[9,0,9,0],[4,0,4,0],[7,7,0,0],[4.5,0,4.5,0],[3,3,0,0],[0,15,0,15],[0,0,8,8],[0,5,0,5],[1.5,0,1.5,0]])
 etykieta_kwadrat =np.array([0,0,0,0,0,0,0,0,0,0,0,0])
@@ -39,4 +47,44 @@ final_frame={
     "BOK 4": frame[3], 
     "ETYKIETA": frame[4] 
 }
-print(pd.DataFrame(final_frame)) 
+#print(pd.DataFrame(final_frame)) 
+
+
+x=w[:,:4]
+y=w[:,4:]
+
+Xtrain, Xtest,Ytrain,Ytest =train_test_split(x,y.ravel(),train_size=0.15)
+clasiication= LogisticRegression()
+clasiication.fit(Xtrain,Ytrain)
+Ypred=clasiication.predict(Xtest)
+#print(Xtest)
+#print(Ytest)
+#print(accuracy_score(Ytest,Ypred))
+#print(Ypred)
+
+
+clasiication1= LinearRegression()
+clasiication1.fit(Xtrain,Ytrain)
+Ypred1=clasiication1.predict(Xtest)
+#print(mean_absolute_error(Ytest,Ypred1))
+
+
+clas1= KNeighborsClassifier(n_neighbors=3)
+clas1.fit(Xtrain,Ytrain)
+Ypred2=clas1.predict(Xtest)
+#print(accuracy_score(Ytest,Ypred2))
+#print(Ypred2)
+
+clas2= DecisionTreeClassifier()
+clas2.fit(Xtrain,Ytrain)
+Ypred3=clas2.predict(Xtest)
+#print(accuracy_score(Ytest,Ypred3))
+#print(Ypred3)
+
+# Zwiększamy liczbę testów
+
+var = np.random.randint(0,100)
+print(var)
+n =np.random.randint(0,3)
+print(n)
+
