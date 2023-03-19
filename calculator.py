@@ -34,6 +34,7 @@ def operator_pressed(operator):
     if saved_operator:
         # podmiana operatora bez wykonywania obliczenia
         saved_operator = operator
+        display.delete(0, tk.END)
     else:
         # zapisanie zapamiętanej liczby i operatora
         saved_number = float(current_value)
@@ -67,9 +68,6 @@ def perform_calculation():
     # zresetowanie zmiennych globalnych
     saved_number = result
     saved_operator = ''
-
-
-
 
 
 
@@ -107,7 +105,7 @@ b14.grid(row=6, column=3, padx=10, pady=10)
 b15 = Button(window, text='.',command=lambda:display.insert(tk.END, '.'), height=2,font=('Arial',25),width=10,background="#b3b3b3")
 b15.grid(row=6, column=0, padx=10, pady=10,columnspan=3, rowspan=1, sticky ='swse')
 
-b16= Button(window, text='0',height=2, font=('Arial', 27),width=10)
+b16= Button(window, text='0',command=lambda:display.insert(tk.END, '0'),height=2, font=('Arial', 27),width=10)
 b16.grid(row=5, column=0, padx=10, pady=10,columnspan=3, rowspan=1, sticky ='swse')
 
 b16= Button(window, text='Clear', height=6,font=('Arial', 25),command=clear_func,width=8,background='red')
@@ -116,11 +114,11 @@ b16.grid(row=1, column=6, padx=10, pady=10, rowspan=3, sticky ='swse')
 b17= Button(window, text='Backspace', command=backspace,height=6,font=('Arial', 25),width=8,background='orange')
 b17.grid(row=4, column=6, padx=10, pady=10, rowspan=2, sticky ='swse')
 
-img = ImageTk.PhotoImage(Image.open("C:\\Users\\prajt\\Desktop\wsb.jpg"))
+# img = ImageTk.PhotoImage(Image.open("C:\\Users\\prajt\\Desktop\wsb.jpg"))
 
 
-b18= Label(window, image=img)
-b18.grid(row=6, column=6, padx=10, pady=10)
+# b18= Label(window, image=img)
+# b18.grid(row=6, column=6, padx=10, pady=10)
 
 
 
