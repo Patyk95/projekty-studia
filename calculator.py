@@ -41,7 +41,7 @@ b11.grid(row=3, column=3, padx=10, pady=10)
 b12 = Button(window, text='x', font=('Arial', 45),width=2)
 b12.grid(row=2, column=3, padx=10, pady=10)
 
-
+dc
 b13 = Button(window, text='+', font=('Arial', 45),width=2)
 b13.grid(row=5, column=3, padx=10, pady=10)
 
